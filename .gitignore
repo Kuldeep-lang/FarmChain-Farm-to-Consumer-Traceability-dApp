@@ -1,0 +1,19 @@
+node_modules/
+dist/
+build/
+coverage/
+coverage.json
+.env
+.env.local
+.env.*.local
+*.log
+.DS_Store
+# Hardhat
+blockchain/cache/
+blockchain/artifacts/
+blockchain/typechain-types/
+blockchain/deployments/localhost.json
+blockchain/deployments/hardhat.json
+blockchain/ignition/deployments/chain-31337/
+# Local dev database
+backend/.mongo-data/

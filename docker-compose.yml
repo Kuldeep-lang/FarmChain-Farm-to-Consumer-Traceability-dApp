@@ -1,0 +1,25 @@
+# Optional local infrastructure for FarmChain development.
+#   docker compose up -d mongo          -> MongoDB on 27017
+#   docker compose up -d mongo ipfs     -> + local IPFS (Kubo) node, use IPFS_PROVIDER=kubo
+# (Alternative without Docker: `npm run mongo:dev` in backend/ starts an embedded MongoDB.)
+services:
+  mongo:
+    image: mongo:7.0.14
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  ipfs:
+    image: ipfs/kubo:v0.32.1
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5001:5001" # RPC API – used by the backend only, never expose publicly
+      - "127.0.0.1:8080:8080" # gateway – set VITE_IPFS_GATEWAY=http://127.0.0.1:8080/ipfs
+    volumes:
+      - ipfs-data:/data/ipfs
+
+volumes:
+  mongo-data:
+  ipfs-data:
